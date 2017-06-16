@@ -1,0 +1,11 @@
+scalaVersion := "2.12.2"
+
+lazy val akkaVersion = "2.5.2"
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+  "com.typesafe.akka" %% "akka-cluster" % akkaVersion,
+  "com.typesafe.akka" %% "akka-distributed-data" % akkaVersion,
+  "com.typesafe.akka" %% "akka-cluster-tools" % akkaVersion,
+  "com.typesafe.akka" %% "akka-stream" % akkaVersion
+)
+  
