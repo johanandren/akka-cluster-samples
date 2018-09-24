@@ -79,42 +79,36 @@ public class DDataSample {
     // wait a bit, just to make the sample clear
     // then update on node3
     SampleHelpers.wait(Duration.ofSeconds(2));
-    CompletionStage<Object> writeCompletion = ask(node3Replicator,
-        new Replicator.Update<GCounter>(
-            counterKey,
-            initialCounterValue,
-            Replicator.writeLocal(),
-            // to use vector clocks the increment needs to know which node we did the update on
-            (GCounter counter) -> counter.increment(Cluster.get(node3), 1L)
-        ),
-        Duration.ofSeconds(3)
-    );
 
-    writeCompletion.whenComplete((complete, failure) -> {
-      if (failure != null) {
+    for (int i = 0; i < 5; i++ ) {
+      CompletionStage<Object> writeCompletion = ask(node3Replicator,
+          new Replicator.Update<GCounter>(
+              counterKey,
+              initialCounterValue,
+              Replicator.writeLocal(),
+              Optional.of(i),
+              // to use vector clocks the increment needs to know which node we did the update on
+              (GCounter counter) -> counter.increment(Cluster.get(node3), 1L)
+          ),
+          Duration.ofSeconds(3)
+      );
 
-      } else {
-        
-      }
-    })
+      writeCompletion.whenComplete((complete, failure) -> {
+        if (failure == null) {
+          node3.log().info("Write completed: {}", complete);
+        } else {
+          node3.log().error(failure, "Write failed");
+        }
+      });
 
-    /*
+      SampleHelpers.wait(Duration.ofSeconds(4));
+    }
 
-  (node3Replicator ? Replicator.Update(
-    key = CounterKey,
-    initial = InitialCounterValue,
-    writeConsistency = Replicator.WriteLocal
-  ) { counter =>
-    counter.increment(Cluster(node3))
-  }).onComplete(result => node3.log.info("Local write result: [{}]", result))
+    // Some more things to try out:
+    // start a new node with a replicator later and see the data reach it
+    // try out the different read and write consistencies
+    // harder with multiple nodes in the same JVM: sever the connection, write on both sides and see that they
+    // reach consistency when they can communicate again
 
-
-  // Some more things to try out:
-  // start a new node with a replicator later and see the data reach it
-  // try out the different read and write consistencies
-  // harder with multiple nodes in the same JVM: sever the connection, write on both sides and see that they
-  // reach consistency when they can communicate again
-
-     */
   }
 }
