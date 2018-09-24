@@ -8,16 +8,14 @@ import akka.cluster.Cluster;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import static com.ligthbend.akka.cluster.java.sample.SampleHelpers.portConfig;
-
 public class ThreeNodeClusterManualJoin {
 
   public static void main(String[] args) {
     final Config commonConfig = ConfigFactory.load("java-cluster-with-manual-join");
 
-    final ActorSystem node1 = ActorSystem.create("cluster", portConfig(25520).withFallback(commonConfig));
-    final ActorSystem node2 = ActorSystem.create("cluster", portConfig(25521).withFallback(commonConfig));
-    final ActorSystem node3 = ActorSystem.create("cluster", portConfig(25522).withFallback(commonConfig));
+    final ActorSystem node1 = ActorSystem.create("cluster", commonConfig);
+    final ActorSystem node2 = ActorSystem.create("cluster", commonConfig);
+    final ActorSystem node3 = ActorSystem.create("cluster", commonConfig);
 
     // joins itself to form cluster
     final Cluster node1Cluster = Cluster.get(node1);
