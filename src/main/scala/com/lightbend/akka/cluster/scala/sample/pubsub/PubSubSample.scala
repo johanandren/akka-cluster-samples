@@ -1,12 +1,14 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample.pubsub
+package com.lightbend.akka.cluster.scala.sample.pubsub
 
 import akka.actor.ActorSystem
 import akka.cluster.pubsub.{DistributedPubSub, DistributedPubSubMediator}
-import com.lightbend.akka.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.LogAllTheThingsActor
 import com.typesafe.config.ConfigFactory
+
 import scala.concurrent.duration._
 
 object PubSubSample extends App {

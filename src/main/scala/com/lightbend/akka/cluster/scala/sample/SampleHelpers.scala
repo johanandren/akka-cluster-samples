@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample
+package com.lightbend.akka.cluster.scala.sample
 
 import akka.actor.ActorSystem
 import akka.cluster.{Cluster, MemberStatus}

@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample.sharding
+package com.lightbend.akka.cluster.scala.sample.sharding
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import akka.cluster.Cluster
@@ -9,7 +9,8 @@ import akka.cluster.ddata.{DistributedData, GCounter, GCounterKey, Replicator}
 import akka.cluster.sharding.{ClusterSharding, ClusterShardingSettings, ShardRegion}
 import akka.pattern.ask
 import akka.util.Timeout
-import com.lightbend.akka.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.SampleHelpers
+import com.lightbend.akka.cluster.scala.sample.LogAllTheThingsActor
 import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Future

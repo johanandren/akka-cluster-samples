@@ -1,12 +1,13 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample.singleton
+package com.lightbend.akka.cluster.scala.sample.singleton
 
 import akka.actor.{ActorRef, ActorSystem, PoisonPill}
 import akka.cluster.Cluster
 import akka.cluster.singleton.{ClusterSingletonManager, ClusterSingletonManagerSettings, ClusterSingletonProxy, ClusterSingletonProxySettings}
-import com.lightbend.akka.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.LogAllTheThingsActor
 import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Await

@@ -1,15 +1,12 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample.cluster
+package com.lightbend.akka.cluster.scala.sample.membership
 
-import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
-import akka.cluster.Cluster
-import akka.cluster.ClusterEvent.{ClusterDomainEvent, CurrentClusterState, MemberEvent}
-import com.lightbend.akka.sample.LogAllTheThingsActor
+import akka.actor.ActorSystem
 import com.typesafe.config.ConfigFactory
 
-object ClusterEvents extends App {
+object ThreeNodeClusterUsingSeedNodes extends App {
   val commonConfig = ConfigFactory.parseString(
     """
       akka {
@@ -23,11 +20,7 @@ object ClusterEvents extends App {
 
   def portConfig(port: Int) = ConfigFactory.parseString(s"akka.remote.artery.canonical.port = $port")
 
-
   val node1 = ActorSystem("cluster", portConfig(25520).withFallback(commonConfig))
-  val loggingActor = node1.actorOf(LogAllTheThingsActor.props(), "logging-actor")
-  Cluster(node1).subscribe(loggingActor, classOf[MemberEvent])
-
   val node2 = ActorSystem("cluster", portConfig(25521).withFallback(commonConfig))
   val node3 = ActorSystem("cluster", portConfig(25522).withFallback(commonConfig))
 

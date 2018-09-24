@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2017 Lightbend Inc. <http://www.typesafe.com>
  */
-package com.lightbend.akka.sample.ddata
+package com.lightbend.akka.cluster.scala.sample.ddata
 
 import akka.actor.ActorSystem
 import akka.cluster.{Cluster, MemberStatus}
@@ -9,7 +9,8 @@ import akka.pattern.ask
 import akka.cluster.ddata.{DistributedData, GCounter, GCounterKey, Replicator}
 import akka.stream.scaladsl.Source
 import akka.util.Timeout
-import com.lightbend.akka.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.{LogAllTheThingsActor, SampleHelpers}
+import com.lightbend.akka.cluster.scala.sample.LogAllTheThingsActor
 import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Future
